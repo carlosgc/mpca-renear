@@ -21,14 +21,14 @@ def plot_data(feature, colors, weight=None):
     if weight is not None:
         px = [0, 0]
         py = [0, 0]
-        py[0] = (weight[0] + px[0]*weight[1]) / -1*weight[2]
-        px[1] = (-1*py[1]*weight[2] - weight[0]) / weight[1]
+        py[0] = -weight[0] / weight[2]
+        px[1] = -weight[0] / weight[1]
         plt.plot(px, py, linestyle='solid')
 
 #%% [markdown]
 # Definição da classe Perceptron, baseada na classe BaseEstimator
 class Perceptron(BaseEstimator, TransformerMixin):
-    def __init__(self, lr=0.25, epoch=500):
+    def __init__(self, lr=1, epoch=500):
         self.lr = lr
         self.epoch = epoch
         pass
@@ -37,9 +37,9 @@ class Perceptron(BaseEstimator, TransformerMixin):
         X = np.array(X)
         bias = np.ones((X.shape[0], 1))
         X = np.hstack((bias, X))
-        self.weights = 1.5 * np.random.rand(X.shape[1])
+        self.weights = np.random.rand(X.shape[1])
 
-        for self.epoch in range(500):
+        for ep in range(self.epoch):
             for idx, _ in enumerate(X):
 
                 xi = X[idx]
