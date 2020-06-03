@@ -1,0 +1,14 @@
+Discussões a respeito do Perceptron.
+
+O que é?
+
+Uma rede neural artificial é um técnica de aprendizado de máquina que utiliza unidades computacionais, também chamadas de nós, agrupadas em uma camadas. Basicamente, uma rede neural artificial possui uma camada de entrada e outra camada de saída, mas também é possível que ela seja implementada com outras camadas intermediárias, para alcançar resultados que não são possível com apenas duas camadas. Perceptron é a rede neural artificial com a arquiteturas mais simples que existe: a camada de entrada e a camada de saída, sendo que a camada de entrada possui um nó para cada característica de uma base de dados de treinamento e a camada de saída possui apenas um nó. Cada nó da camada de entrada é conectado ao nó da camada de saída por um peso. Os valores passados para os nós de entrada são multiplicados pelo peso de cada nó e depois somados, o valor resultante é passado para o nó da camada de saída. O nó da camada de saída possui uma função de ativação que resulta em 1 ou -1. Os valores de entrada da rede têm um saída esperada. Se o resultado da rede for diferente do que era esperado, os pesos dos nós de entrada são atualizados de acordo com essa diferença. Esse processo realizado como todo a base de dados e repetido por um número arbitrário até que os resultados de saída da rede convirjam com os resultados esperados pelos valores de entrada. A grande limitação do Perceptron se dá pelo fato de que a convegência dos resultados só é possível se os dados forem linarmente separáveis. O resultado esperada após todo o processo de ajustamento dos pesos é que a rede possa classificar corretamente dados que nunca foram processados por ela anteriormente.
+
+Qual a sua importância histórica?
+
+O Algoritimo do Perceptron é visto como um pilar fundamental da redes neurais artificiais e criou grandes expectativa sobre as perspectivas da inteligência artificial.
+
+
+Como ele se relaciona com outras arquiteturas de aprendizado de máquina?
+
+Utilizando funções de ativação diferentes é possível simular outros tipos de modelos de aprendizagem de máquina, que são facilmente representados como redes neurais de arquitetura simples, como o Perceptron.

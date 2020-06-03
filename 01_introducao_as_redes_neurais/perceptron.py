@@ -7,13 +7,12 @@ import matplotlib.pyplot as plt
 
 from sklearn.metrics import accuracy_score
 from sklearn.datasets import load_breast_cancer
-from sklearn.preprocessing import LabelBinarizer
 from sklearn.model_selection import train_test_split
-from sklearn.base import BaseEstimator, TransformerMixin
+from sklearn.base import BaseEstimator, ClassifierMixin
 
 #%% [markdown]
 # Definição de função para visualização de exemplo de teste do Perceptron
-  
+
 def plot_data(feature, colors, weight=None):
 
     plt.scatter(feature[:, 0], feature[:, 1], c=colors)
@@ -27,7 +26,8 @@ def plot_data(feature, colors, weight=None):
 
 #%% [markdown]
 # Definição da classe Perceptron, baseada na classe BaseEstimator
-class Perceptron(BaseEstimator, TransformerMixin):
+from sklearn.preprocessing import LabelBinarizer
+class Perceptron(BaseEstimator, ClassifierMixin):
     def __init__(self, lr=1, epoch=500):
         self.lr = lr
         self.epoch = epoch
@@ -38,6 +38,9 @@ class Perceptron(BaseEstimator, TransformerMixin):
         bias = np.ones((X.shape[0], 1))
         X = np.hstack((bias, X))
         self.weights = np.random.rand(X.shape[1])
+
+        self.labelbinarizer = LabelBinarizer(neg_label=-1)
+        y = self.labelbinarizer.fit_transform(y).reshape(-1)
 
         for ep in range(self.epoch):
             for idx, _ in enumerate(X):
@@ -59,6 +62,10 @@ class Perceptron(BaseEstimator, TransformerMixin):
 
         pred = np.sign(np.dot(X, self.weights))
         return pred if shapelen > 1 else pred[0]
+
+    def score(self, X, y, sample_weight=None):
+        y = self.labelbinarizer.fit_transform(y).reshape(-1)
+        return super().score(X, y, sample_weight)
 
 #%% [markdown]
 #  Teste da perceptron com dataset resultante da operação binária OR
@@ -87,27 +94,17 @@ X, y = data.data, data.target
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33)
 
 #%% [markdown]
-# Transformando as classes binarias do dataset nas classes 1 e -1
-  
-labelbinarizer = LabelBinarizer(neg_label=-1)
-labelbinarizer.fit(y_train)
-y_train_bin = labelbinarizer.transform(y_train).reshape(-1)
-y_test_bin = labelbinarizer.transform(y_test).reshape(-1)
-
-#%% [markdown]
 # Treinando o perceptron
   
 perceptron = Perceptron()
-perceptron.fit(X_train, y_train_bin)
+perceptron.fit(X_train, y_train)
 
 #%% [markdown]
 # Acurácia da predição dos dados de treinamento
-  
-y_train_pred = perceptron.predict(X_train)
-accuracy_score(y_train_bin, y_train_pred)
+
+perceptron.score(X_train, y_train)
 
 #%% [markdown]
 # Acurácia da predição dos dados de teste
   
-y_test_pred = perceptron.predict(X_test)
-accuracy_score(y_test_bin, y_test_pred)
+perceptron.score(X_test, y_test)
