@@ -1,0 +1,7 @@
+Comparação entre Redes Neurais Rasas.
+
+Qual a relação que existe entre redes neurais single layer e suas funções de ativação?
+
+Redes neurais single layer são variações do perceptron. A principal diferenças entre elas são suas funções de ativação da camada final e a função loss utilizada nas saídas das redes. Essas alterações resultam em diferentes modelos tradicionais de aprendizado de máquina.
+
+Dependendo da função de ativação a saída da rede pode ser um valor discreto ou contínuo. No caso do valor ser contínuo, ele pode ser convertido para valor discreto para determinar a classe predita ou ser utilizado como um valor de relevância ou probalidade da classe.
