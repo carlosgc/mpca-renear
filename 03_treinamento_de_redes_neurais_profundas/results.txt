@@ -1,0 +1,40 @@
+A comparação entre os classificadores ELM, Perceptron e MLPClassifier foram realizados com os seguintes datasets:
+
+base1: base com mais exemplos do que características criada com make_classification com 1000 exemplos, 5 características e duas classes
+base2: base com mais características do que exemplos criada com make_classification com 1000 exemplos, 1100 características e duas classes
+base3: base com mais exemplos do que características criada com make_gaussian_quantiles com 1000 exemplos, 5 características e três classes
+base4: base com mais características do que exemplos criada com make_gaussian_quantiles com 1000 exemplos, 1100 características e três classes
+
+A tabela abaixo apresenta os resultados obtidos na fase de teste dos classificadores:
+
+-----------------------------------------------------------------------------
+dataset	classifier		mean accuracy	std accuracy	mean time	 std time
+-----------------------------------------------------------------------------
+base1	ELM						0.955		0.017889		0.01s		0.00s
+base1	MLPClassifier			0.958		0.011662		6.04s		1.64s
+base1	Perceptron				0.854		0.084935		0.01s		0.00s
+-----------------------------------------------------------------------------
+base2	ELM						0.540		0.045497		0.02s		0.00s
+base2	MLPClassifier			0.602		0.031401		8.21s		0.87s
+base2	Perceptron				0.806		0.017436		0.12s		0.02s
+-----------------------------------------------------------------------------
+base3	ELM						0.504		0.030232		0.01s		0.00s
+base3	MLPClassifier			0.901		0.017720		2.06s		0.31s
+base3	Perceptron				0.272		0.046217		0.02s		0.00s
+-----------------------------------------------------------------------------
+base4	ELM						0.337		0.045891		0.03s		0.01s
+base4	MLPClassifier			0.324		0.038131		9.34s		0.88s
+base4	Perceptron				0.342		0.031875		0.30s		0.03s
+-----------------------------------------------------------------------------
+
+Os resultados mostram que:
+
+	- para o dataset base1, a base mais simples, todos os classificadores apresetaram média de acurácia acima de 85%.
+
+	- para o dataset base2, que possui mais características do que exemplos, o Perceptron foi o único classificador que apresentou média de acurácia acima de 80%. A baixa acurácia dos outros classificadores pode reflexo do grande quantidade de características em relação à quantidade de exemplos.
+
+	- para o dataset base3, distribui as classes em hiperesferas concentricas, dificultando a tarefa de classificação para classificadores lineares. Nesse teste, a MLPClassifier apresentou acurácia média de 90%, o ELM atingiu média de 50% e o Perceptron 27%.
+
+	- a base4 possui o mesmo tipo de distribuição da base3, mas possui mais características do que exemplos. Nesse teste, todos os classificadores apresetaram acurácia média próxima dos 30%.
+
+	- Outro ponto a destacar é que os testes da MLPClassifier demoraram muito mais do que os outros classificadores.
